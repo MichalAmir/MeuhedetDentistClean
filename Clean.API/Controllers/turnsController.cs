@@ -12,9 +12,9 @@ namespace Clean.Api.Controllers
     public class turnsController : ControllerBase
     {
         private readonly turnsServices _turnsServices;
-        public turnsController(turnsServices turnsServices)
+        public turnsController(turnsServices tS)
         {
-            _turnsServices = turnsServices;
+            _turnsServices = tS;
         }
         // GET: api/<turnsController>
         [HttpGet]
@@ -25,9 +25,9 @@ namespace Clean.Api.Controllers
 
         // GET api/<turnsController>/5
         [HttpGet("{id}")]
-        public turns Get(int n)
+        public turns Get(string NumRoom)
         {
-            return _turnsServices.GetTurnById(n);
+            return _turnsServices.GetTurnById(NumRoom);
         }
 
         // POST api/<turnsController>
@@ -39,9 +39,16 @@ namespace Clean.Api.Controllers
 
         // PUT api/<turnsController>/5
         [HttpPut("{id}")]
-        public void Put(int n, [FromBody] turns value)
+        public void Put(string NumRoom, [FromBody] turns value)
         {
-            _turnsServices.UpdateTurn(value, n);
+            _turnsServices.UpdateTurn(value, NumRoom);
+        }
+
+        // DELETE api/<turnsController>/5
+        [HttpDelete("{id}")]
+        public void Delete(string NumRoom)
+        {
+            _turnsServices.DeleteTurn(NumRoom);
         }
 
     }

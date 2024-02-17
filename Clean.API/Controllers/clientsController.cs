@@ -12,9 +12,9 @@ namespace Clean.Api.Controllers
     public class clientsController : ControllerBase
     {
         private readonly clientsServices _clientsServices;
-        public clientsController(clientsServices clientsServices)
+        public clientsController(clientsServices clientServices)
         {
-            _clientsServices = clientsServices;
+            _clientsServices = clientServices;
         }
         // GET: api/<clientsController>
         [HttpGet]

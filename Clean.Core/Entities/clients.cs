@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Clean.Core.Entities
 {
     public class clients
     {
+        [Key]
         public int IdClient { get; set; }
         public string NameClient { get; set; }
         public int AgeClient { get; set; }

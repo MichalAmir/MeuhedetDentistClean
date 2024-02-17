@@ -1,5 +1,11 @@
 ﻿using Clean.Core.Entities;
 using Clean.Core.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace Clean.Service
 {
@@ -14,17 +20,21 @@ namespace Clean.Service
         {
             return _turnsRepository.GetList();
         }
-        public turns GetTurnById(int n)
+        public turns GetTurnById(string NumRoom)
         {
-            return _turnsRepository.GetById(n);
+            return _turnsRepository.GetById(NumRoom);
         }
         public void AddTurn(turns turn)
         {
             _turnsRepository.Add(turn);
         }
-        public void UpdateTurn(turns turn, int n)
+        public void UpdateTurn(turns turn, string NumRoom)
         {
-            _turnsRepository.Update(turn, n);
+            _turnsRepository.Update(turn, NumRoom);
+        }
+        public void DeleteTurn(string NumRoom)
+        {
+            _turnsRepository.Remove(NumRoom);
         }
     }
 }

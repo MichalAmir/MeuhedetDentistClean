@@ -10,9 +10,10 @@ namespace Clean.Core.Repositories
     public interface ITurnsRepository
     {
         List<turns> GetList();
-        turns GetById(int id);
+        turns GetById(string NumRoom);
         void Add(turns turn);
-        void Update(turns turn, int n);
+        void Update(turns turn, string NumRoom);
+        void Remove(string NumRoom);
     }
 }
 

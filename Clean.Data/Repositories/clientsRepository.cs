@@ -14,10 +14,11 @@ namespace Clean.Data.Repository
         public clientsRepository(DataContext context)
         {
             _context = context;
+            _context.SaveChanges();
         }
         public List<clients> GetList()
         {
-            return _context.Clients;
+            return _context.Clients.ToList();
         }
         public clients GetById(int id)
         {
@@ -32,6 +33,7 @@ namespace Clean.Data.Repository
         {
             clients new_client = new clients { IdClient = client.IdClient, NameClient = client.NameClient, AgeClient = client.AgeClient, AdressClient = client.AdressClient };
             _context.Clients.Add(new_client);
+            _context.SaveChanges();
         }
         public void Update(clients client, int id)
         {
@@ -44,6 +46,7 @@ namespace Clean.Data.Repository
                     clt.NameClient = update_client.NameClient;
                     clt.AgeClient = update_client.AgeClient;
                     clt.AdressClient = update_client.AdressClient;
+                    _context.SaveChanges();
                 }
 
             }
