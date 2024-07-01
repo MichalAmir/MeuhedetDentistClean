@@ -34,14 +34,14 @@ namespace Clean.Api.Controllers
         [HttpPost]
         public void Post([FromBody] clients value)
         {
-            _clientsServices.AddClient(value);
+            _clientsServices.AddClientAsync(value);
         }
 
         // PUT api/<clientsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] clients value)
         {
-            _clientsServices.UpdateClient(value, id);
+            _clientsServices.UpdateClientAsync(value, id);
         }
 
     }

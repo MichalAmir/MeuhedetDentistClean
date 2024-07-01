@@ -34,14 +34,14 @@ namespace Clean.Api.Controllers
         [HttpPost]
         public void Post([FromBody] doctors value)
         {
-            _doctorsServices.AddDoctor(value);
+            _doctorsServices.AddDoctorAsync(value);
         }
 
         // PUT api/<doctorsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] doctors value)
         {
-            _doctorsServices.UpdateDoctor(value, id);
+            _doctorsServices.UpdateDoctorAsync(value, id);
         }
 
     }

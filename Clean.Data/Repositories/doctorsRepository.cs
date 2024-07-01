@@ -24,32 +24,43 @@ namespace Clean.Data.Repository
         {
             foreach (doctors doctor in _context.Doctors)
             {
-                if (doctor.IdDoctors == id)                                                                                                                 
+                if (doctor.IdDoctors == id)
                     return doctor;
             }
             return null;
         }
-        public void Add(doctors doctor)
+        public async Task AddAsync(doctors doctor)
         {
             doctors new_doctor = new doctors { IdDoctors = doctor.IdDoctors, NameDoctors = doctor.NameDoctors, SalaryDoctors = doctor.SalaryDoctors, HoursDoctors = doctor.HoursDoctors };
             _context.Doctors.Add(new_doctor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void Update(doctors doctor, int id)
+        public async Task UpdateAsync(doctors doctor, int id)
         {
             foreach (doctors dor in _context.Doctors)
             {
-                if (dor.IdDoctors == id)
+                if (dor.IdDoctors.Equals(id))
                 {
                     dor.IdDoctors = dor.IdDoctors;
                     dor.NameDoctors = dor.NameDoctors;
                     dor.SalaryDoctors = dor.SalaryDoctors;
                     dor.HoursDoctors = dor.HoursDoctors;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
 
             }
         }
+        public async Task RemoveAsync(int id)
+        {
+            foreach (var dor in _context.Doctors)
+            {
+                if (dor.IdDoctors.Equals(id))
+                {
+                    _context.Doctors.Remove(dor);
+                    await _context.SaveChangesAsync();
+                }
+            }
 
+        }
     }
 }

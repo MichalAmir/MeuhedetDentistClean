@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Clean.Core.Repositories
 {
-    public interface IDoctorsRepository
+    public interface IClientsRepository
     {
-        List<doctors> GetList();
-        doctors GetById(int id);
-        void Add(doctors doctor);
-        void Update(doctors doctor, int id);
+        List<clients> GetList();
+        clients GetById(int id);
+        Task AddAsync(clients client);
+        Task UpdateAsync(clients client, int id);
     }
 }

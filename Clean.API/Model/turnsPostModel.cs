@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Clean.Core.Entities
+﻿namespace Clean.Api.Model
 {
-    public class turns
+    public class turnsPostModel
     {
-        [Key]
         public string NumTurn { get; set; }
         public Boolean IsAvailableTurn { get; set; }
         public DateTime DateTimeTurn { get; set; }
         public int NumRoom { get; set; }
-        public List<turns> Turns { get; set; }
     }
 }

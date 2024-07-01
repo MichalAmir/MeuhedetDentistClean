@@ -1,5 +1,6 @@
 ﻿using Clean.Core.Entities;
 using Clean.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace Clean.Data.Repository
         public turnsRepository(DataContext context)
         {
             _context = context;
-            _context.SaveChanges();
         }
         public List<turns> GetList()
         {
@@ -29,13 +29,13 @@ namespace Clean.Data.Repository
             }
             return null;
         }
-        public void Add(turns turn)
+        public async Task AddAsync(turns turn)
         {
             turns new_turn = new turns { NumTurn = turn.NumTurn, IsAvailableTurn = turn.IsAvailableTurn, DateTimeTurn = turn.DateTimeTurn, NumRoom = turn.NumRoom };
             _context.Turns.Add(new_turn);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void Update(turns turn, string NumRoom)
+        public async Task UpdateAsync(turns turn, string NumRoom)
         {
             foreach (turns tun in _context.Turns)
             {
@@ -45,22 +45,23 @@ namespace Clean.Data.Repository
                     tun.IsAvailableTurn = turn.IsAvailableTurn;
                     tun.DateTimeTurn = turn.DateTimeTurn;
                     tun.NumRoom = turn.NumRoom;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
 
             }
         }
-        public void Remove(string NumRoom)
+        public async Task RemoveAsync(string NumRoom)
         {
-            foreach (var numR in _context.Turns)
+            foreach (var tun in _context.Turns)
             {
-                if (numR.NumRoom.Equals(NumRoom))
+                if (tun.NumRoom.Equals(NumRoom))
                 {
-                    _context.Turns.Remove(numR);
-                    _context.SaveChanges();
+                    _context.Turns.Remove(tun);
+                    await _context.SaveChangesAsync();
                 }
             }
         }
+
 
     }
 }

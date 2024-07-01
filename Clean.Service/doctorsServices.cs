@@ -23,13 +23,13 @@ namespace Clean.Service
         {
             return _doctorsRepository.GetById(id);
         }
-        public void AddDoctor(doctors doctor)
+        public async Task AddDoctorAsync(doctors doctor)
         {
-            _doctorsRepository.Add(doctor);
+           await _doctorsRepository.AddAsync(doctor);
         }
-        public void UpdateDoctor(doctors doctor, int id)
+        public async Task UpdateDoctorAsync(doctors doctor, int id)
         {
-            _doctorsRepository.Update(doctor, id);
+           await _doctorsRepository.UpdateAsync(doctor, id);
         }
     }
 }

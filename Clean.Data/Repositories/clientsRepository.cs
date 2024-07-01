@@ -29,13 +29,13 @@ namespace Clean.Data.Repository
             }
             return null;
         }
-        public void Add(clients client)
+        public async Task AddAsync(clients client)
         {
             clients new_client = new clients { IdClient = client.IdClient, NameClient = client.NameClient, AgeClient = client.AgeClient, AdressClient = client.AdressClient };
             _context.Clients.Add(new_client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void Update(clients client, int id)
+        public async Task UpdateAsync(clients client, int id)
         {
             clients update_client = new clients { IdClient = client.IdClient, NameClient = client.NameClient, AgeClient = client.AgeClient, AdressClient = client.AdressClient };
             foreach (clients clt in _context.Clients)
@@ -46,7 +46,7 @@ namespace Clean.Data.Repository
                     clt.NameClient = update_client.NameClient;
                     clt.AgeClient = update_client.AgeClient;
                     clt.AdressClient = update_client.AdressClient;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
 
             }

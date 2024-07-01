@@ -24,17 +24,17 @@ namespace Clean.Service
         {
             return _turnsRepository.GetById(NumRoom);
         }
-        public void AddTurn(turns turn)
+        public async Task AddTurnAsync(turns turn)
         {
-            _turnsRepository.Add(turn);
+            await _turnsRepository.AddAsync(turn);
         }
-        public void UpdateTurn(turns turn, string NumRoom)
+        public async Task UpdateTurnAsync(turns turn, string NumRoom)
         {
-            _turnsRepository.Update(turn, NumRoom);
+            await _turnsRepository.UpdateAsync(turn, NumRoom);
         }
-        public void DeleteTurn(string NumRoom)
+        public async Task DeleteTurnAsync(string NumRoom)
         {
-            _turnsRepository.Remove(NumRoom);
+            await _turnsRepository.RemoveAsync(NumRoom);
         }
     }
 }

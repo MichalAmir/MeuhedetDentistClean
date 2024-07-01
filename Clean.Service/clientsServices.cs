@@ -23,13 +23,9 @@ namespace Clean.Service
         {
             return _clientsRepository.GetById(id);
         }
-        public void AddClient(clients client)
+        public async Task AddClientAsync(clients client)
         {
-            _clientsRepository.Add(client);
-        }
-        public void UpdateClient(clients client, int id)
-        {
-            _clientsRepository.Update(client, id);
+            await _clientsRepository.AddAsync(client);
         }
     }
 }

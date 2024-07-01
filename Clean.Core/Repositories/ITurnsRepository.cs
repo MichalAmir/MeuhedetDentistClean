@@ -11,9 +11,9 @@ namespace Clean.Core.Repositories
     {
         List<turns> GetList();
         turns GetById(string NumRoom);
-        void Add(turns turn);
-        void Update(turns turn, string NumRoom);
-        void Remove(string NumRoom);
+        Task AddAsync(turns turn);
+        Task UpdateAsync(turns turn, string NumRoom);
+        Task RemoveAsync(string NumRoom);
     }
 }
 

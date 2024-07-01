@@ -1,14 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Clean.Core.Entities
+namespace Clean.Core.DTOs
 {
-    public class clients
+    public class clientsDTO
     {
-        [Key]
         public int IdClient { get; set; }
         public string NameClient { get; set; }
         public int AgeClient { get; set; }
         public string AdressClient { get; set; }
-        public List<clients> Clients { get; set; }
     }
 }

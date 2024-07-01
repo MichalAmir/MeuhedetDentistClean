@@ -1,6 +1,11 @@
-﻿using Clean.Core.Entities;
+﻿using AutoMapper;
+using Clean.Core.DTOs;
+using Clean.Api.Model;
+using Clean.Core;
+using Clean.Core.Entities;
 using Clean.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,43 +17,46 @@ namespace Clean.Api.Controllers
     public class turnsController : ControllerBase
     {
         private readonly turnsServices _turnsServices;
-        public turnsController(turnsServices tS)
+        private readonly IMapper _mapper;
+        public turnsController(turnsServices tS,IActionResultTypeMapper mapper)
         {
             _turnsServices = tS;
+            _mapper = mapper;
         }
         // GET: api/<turnsController>
         [HttpGet]
-        public IEnumerable<turns> Get()
+        public ActionResult<turns> Get()
         {
-            return _turnsServices.GetAll();
+            var list = _turnsServices.GetAll();
+            var listDto = _mapper.Map<IEnumerable<turnsDTO>>(list);
+
+            return Ok(listDto);
         }
 
         // GET api/<turnsController>/5
         [HttpGet("{id}")]
-        public turns Get(string NumRoom)
+        public ActionResult Get(string NumRoom)
         {
-            return _turnsServices.GetTurnById(NumRoom);
+
+            var resOrd = _turnsServices.GetTurnById(NumRoom);
+            var turDto = _mapper.Map<turnsDTO>(resOrd);
+
+            return Ok(turDto);
         }
 
         // POST api/<turnsController>
         [HttpPost]
-        public void Post([FromBody] turns value)
+        public void Post([FromBody] turnsPostModel value)
         {
-            _turnsServices.AddTurn(value);
+            var newTurn = new turns { NumRoom = value.NumRoom, NumTurn = value.NumTurn, IsAvailableTurn = value.IsAvailableTurn, DateTimeTurn = value.DateTimeTurn };
+            _turnsServices.AddTurnAsync(newTurn);
         }
 
         // PUT api/<turnsController>/5
         [HttpPut("{id}")]
         public void Put(string NumRoom, [FromBody] turns value)
         {
-            _turnsServices.UpdateTurn(value, NumRoom);
-        }
-
-        // DELETE api/<turnsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(string NumRoom)
-        {
-            _turnsServices.DeleteTurn(NumRoom);
+            _turnsServices.UpdateTurnAsync(value, NumRoom);
         }
 
     }
